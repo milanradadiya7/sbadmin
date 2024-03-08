@@ -1,0 +1,42 @@
+<body>
+
+    <a href="/productCreate"><button class="btn btn-primary">Add List</button></a>
+
+    <div class="row">
+        <% product.forEach(e=> { %>
+            <div class="col-3">
+                <div class="border border-5 border-dark p-3 mt-3">
+                    <%= e.productName %><br />
+                        <%= e.ProductDescription %><br />
+                            <%= e.categories %><br />
+                                <%= e.productPrice %><br />
+                                    <%= e.productRating %><br />
+                                        <%= e.productSizeandColor %><br />
+                                            <%= e.productBrand %><br />
+                                                <%= e.productWarranty %><br />
+                                                    <%= e.productReview %>
+                                                        <a href="/productUpdate?id=<%= e._id %>"> <button type="submit"
+                                                                class="btn btn-success ms-5">Edit</button></a>
+                                                        <a href="/deleteData?id=<%= e._id %>"> <button type="submit"
+                                                                class="btn btn-danger ms-5">Delete</button></a>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+</body>
+
+
+
+
+
+
+<!-- async await/ promise
+callback function
+destruring
+middleware
+request method/type
+routes
+mongodb query / aggregation
+es6, arrow functions js
+modules export
+es6 vs es5 -->

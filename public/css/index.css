@@ -1,0 +1,37 @@
+.profile-image {
+    width: auto;
+    height: 703px;
+    background-image: url('/image/image-3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profile-page {
+    padding-top: 4%;
+    padding-left: 30%;
+}
+
+.repeat-image{
+    width: auto;
+    height: 703px;
+    background-image: url('/image/image-4.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.repeatpass{
+    padding-top: 12%;
+    padding-left: 30%;
+}
+
+.user{
+    width: auto;
+    height: 600px;
+    border:3px solid black;
+    padding: 30px 0 0 20px;
+    margin: 30px;
+}
+.add{
+    margin-top: 2%;
+    margin-left: 32%;
+}

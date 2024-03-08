@@ -1,0 +1,78 @@
+<body>
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+  <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+    For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">
+      official DataTables documentation</a>.</p>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Delete/Update</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Delete/Update</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            <% a.docs.forEach(e=> { %>
+              <tr>
+                <td>
+                  <%= e.firstName %>
+                </td>
+                <td>
+                  <%= e.lastName %>
+                </td>
+                <td>
+                  <%= e.email %>
+                </td>
+                <td>
+                  <%= e.password %>
+                </td>
+                <td>
+                  <a href="/delete?id=<%= e._id %>"><Button class="btn btn-danger">Delete</Button></a>
+                  <a href="/profile?id=<%= e._id %>"><Button class="btn btn-success">Edit</Button></a>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+        <td>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <% if (a.prevPage!=null) { %>
+                <li class="page-item"><a class="page-link" href="/table?page=<%= a.prevPage %>">Previous</a>
+                </li>
+                <% } %>
+                  <% for( let index=1; index <=a.totalPages; index++ ) { %>
+                    <li class="page-item"><a class="page-link" href="?page=<%= index %>">
+                        <%= index %>
+                      </a></li>
+                    <% } %>
+                      <li class="page-item"><a class="page-link" href="/table?page=<%= a.nextPage %>">Next</a>
+                      </li>
+            </ul>
+          </nav>
+        </td>
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</body>
