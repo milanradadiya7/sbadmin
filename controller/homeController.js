@@ -150,20 +150,22 @@ function chart(req, res) {
 async function table(req, res) {
     var data = req.body;
     // var user = await UserModel.find({});
-    const pageNumber = req.query.page || 1; // Get the current page number from the query parameters
-    const pageSize = 5; // Number of items per page
+    // const pageNumber = req.query.page || 1; // Get the current page number from the query parameters
+    // const pageSize = 5; // Number of items per page
 
-    var user = await UserModel.paginate({}, { page: pageNumber, limit: pageSize }, (err, result) => {
-        if (err) {
-            return res.status(500).json({ message: 'Error occurred while fetching users.' });
-        }
-        // const { docs, total, limit, page, pages } = result;
-        // res.json({ users: docs, total, limit, page, pages });
-        console.log(result, "result.............");
-        res.render("tables", {
-            a: result,  // a define in table page
-        });
-    });
+    const page = parseInt(req.query.page)
+
+    // var user = await UserModel.paginate({}, { page: pageNumber, limit: pageSize }, (err, result) => {
+    //     if (err) {
+    //         return res.status(500).json({ message: 'Error occurred while fetching users.' });
+    //     }
+    //     // const { docs, total, limit, page, pages } = result;
+    //     // res.json({ users: docs, total, limit, page, pages });
+    //     console.log(result, "result.............");
+    //     res.render("tables", {
+    //         a: result,  // a define in table page
+    //     });
+    // });
 };
 // user table show kare end ...................................................
 

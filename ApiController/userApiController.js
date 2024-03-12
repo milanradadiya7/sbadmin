@@ -17,13 +17,23 @@ async function userRegister(req, res) {
     });
 };
 
-async function userProfile(req, res) {
+async function userProfileget(req, res) {
+    var user = await UserModel.findOne({});
+    res.json({
+        status: true,
+        message: "Profile Find",
+        data: user
+    });
+}
+
+async function userProfilepost(req, res) {
     var user = await UserModel.findOne({});
     console.log(user, "userprofile===================");
     var token = req.body.token;
     console.log(token, "token");
     var decoded = jwt.verify(token, 'key');
     res.json({
+        token: token,
         status: true,
         message: "Profile Created",
         Data: decoded,
@@ -42,18 +52,38 @@ async function userTable(req, res) {
 };
 
 async function userlogin(req, res) {
-    var loginUser = await UserModel.findOne({});
+    var data = req.body
+    console.log(data.email);
+    console.log(data.password);
+    var loginUser = await UserModel.findOne({
+        email: req.body.email,
+        password: req.body.password
+    });
+    const loginuser = {
+        firstName: data.firstname,
+        lastName: data.lastname,
+        email: data.email,
+        password: data.password
+    }
     console.log(loginUser, "userlist....................");
     req.session.user = loginUser;
     console.log(req.session.user, "user session ..........................");
+    if (loginUser == null) {
+        res.json({
+            status: false,
+            message: "Login Failed: User not found",
+            data: loginUser
+        });
+    } else {
+        var token = jwt.sign(loginuser, 'key');
+        res.json({
+            token: token,
+            status: true,
+            message: "Login Success",
+            data: loginUser
+        });
+    }
 
-    var token = jwt.sign(req.body, 'key');
-    res.json({
-        token: token,
-        status: true,
-        message: "Login Created",
-        data: loginUser
-    });
 };
 
 async function userProfileUpdate(req, res) {
@@ -86,7 +116,8 @@ async function userRemove(req, res) {
 
 module.exports = {
     userRegister,
-    userProfile,
+    userProfileget,
+    userProfilepost,
     userTable,
     userlogin,
     userProfileUpdate,
