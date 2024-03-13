@@ -26,10 +26,11 @@ async function userlogin(req, res) {
         password: data.password
     });
     const loginuser = {
-        firstName: data.firstname,
-        lastName: data.lastname,
-        email: data.email,
-        password: data.password
+        _id: loginUser._id,
+        firstName: loginUser.firstname,
+        lastName: loginUser.lastname,
+        email: loginUser.email,
+        password: loginUser.password
     }
     console.log(loginUser, "userlist....................");
 
@@ -52,27 +53,27 @@ async function userlogin(req, res) {
 };
 
 async function userProfileget(req, res) {
-    var user = await UserModel.findOne({ _id: req.body.id });
-    console.log(user, "userprofileget..........");
     var token = req.body.token;
-    console.log(token, "token............");
+    console.log(token, "token");
+    var uprofile = jwt.verify(token, 'key');
+    var user = await UserModel.findOne({ _id: uprofile._id });
+    console.log(user, "userprofileget..........");
     res.json({
         status: true,
         message: "Profile Find",
         data: user
     });
-}
+};
 
 async function userProfilepost(req, res) {
-    var user = await UserModel.findOne({ _id: req.body.id });
-    console.log(user, "userprofile===================");
     var token = req.body.token;
     console.log(token, "token");
     var decoded = jwt.verify(token, 'key');
+    var user = await UserModel.findOne({ _id: decoded._id });
+    console.log(user, "userprofile===================");
     res.json({
         status: true,
         message: "Profile Created",
-        Data: decoded,
         data: user
     })
 };

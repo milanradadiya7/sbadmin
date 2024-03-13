@@ -148,12 +148,10 @@ function chart(req, res) {
 
 // user table show kare start ............................................
 async function table(req, res) {
-    var data = req.body;
     // var user = await UserModel.find({});
     // const pageNumber = req.query.page || 1; // Get the current page number from the query parameters
     // const pageSize = 5; // Number of items per page
 
-    const page = parseInt(req.query.page)
 
     // var user = await UserModel.paginate({}, { page: pageNumber, limit: pageSize }, (err, result) => {
     //     if (err) {
@@ -166,6 +164,26 @@ async function table(req, res) {
     //         a: result,  // a define in table page
     //     });
     // });
+
+    const page = parseInt(req.query.page || 1);
+    const limit = parseInt(req.query.limit || 5);
+
+    var skip = (page - 1) * limit;
+
+    let user = await UserModel.find({}).skip(skip).limit(limit);
+    var count = await UserModel.countDocuments({});
+    var totalPages = Math.ceil(count / limit);
+
+    var pData = {
+        status: true,
+        data: user,
+        totalPages: totalPages,
+        currentPage: page,
+        nextPage: page + 1 > totalPages ? false : page + 1,
+        prevPage: page - 1 >= 1 ? page - 1 : false,
+        message: "success"
+    };
+    res.render("tables", { pData })
 };
 // user table show kare end ...................................................
 

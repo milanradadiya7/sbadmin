@@ -32,7 +32,7 @@
             </tr>
           </tfoot>
           <tbody>
-            <% a.docs.forEach(e=> { %>
+            <% pData.data.forEach(e=> { %>
               <tr>
                 <td>
                   <%= e.firstName %>
@@ -55,21 +55,31 @@
           </tbody>
         </table>
         <td>
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <% if (a.prevPage!=null) { %>
-                <li class="page-item"><a class="page-link" href="/table?page=<%= a.prevPage %>">Previous</a>
-                </li>
-                <% } %>
-                  <% for( let index=1; index <=a.totalPages; index++ ) { %>
-                    <li class="page-item"><a class="page-link" href="?page=<%= index %>">
-                        <%= index %>
-                      </a></li>
+          <div class="row">
+            <div class="col-sm-12 col-md-7">
+              <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item previous <%= pData.prevPage?"":" disabled" %>"
+                    id="dataTable_previous">
+                    <a href="/table?page=<%= pData.prevPage %>" aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+                      class="page-link">Previous</a>
+                  </li>
+                  <% for( let i=1; i <=pData.totalPages; i++ ) { %>
+                    <li class="paginate_button page-item <%= pData.currentPage==i?" active":"" %>">
+                      <a href="/table?page=<%= i %>" aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+                        class="page-link"><%= i %></a>
+                    </li>
                     <% } %>
-                      <li class="page-item"><a class="page-link" href="/table?page=<%= a.nextPage %>">Next</a>
+                      <li class="paginate_button page-item next <%= pData.nextPage?"":" disabled" %>"
+                        id="dataTable_next">
+                        <a href="/table?page=<%= pData.nextPage %>" aria-controls="dataTable" data-dt-idx="7"
+                          tabindex="0" class="page-link">Next</a>
                       </li>
-            </ul>
-          </nav>
+                </ul>
+              </div>
+            </div>
+          </div>
+
         </td>
       </div>
     </div>
