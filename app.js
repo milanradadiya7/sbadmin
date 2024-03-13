@@ -35,7 +35,7 @@ const corsOptions = {
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.set("view engine", "ejs");
 app.set('layout', 'layout/layout');

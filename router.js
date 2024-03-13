@@ -39,7 +39,7 @@ route.get("/logout", logOut);
 
 route.post("/api/user-register", userRegister);
 route.post("/api/user-login", userlogin);
-route.get("/api/user-profiles", userProfileget);
+route.get("/api/user-profile", userProfileget);
 route.post("/api/user-profile", userProfilepost);
 route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-table", userTable);

@@ -53,10 +53,10 @@ async function userlogin(req, res) {
 };
 
 async function userProfileget(req, res) {
-    var token = req.body.token;
-    console.log(token, "token");
-    var uprofile = jwt.verify(token, 'key');
-    var user = await UserModel.findOne({ _id: uprofile._id });
+    var token = req.headers.token;
+    console.log(token, "token get.....");
+    var decoded = jwt.verify(token, 'key');
+    var user = await UserModel.findOne({ _id: decoded._id });
     console.log(user, "userprofileget..........");
     res.json({
         status: true,
@@ -66,8 +66,8 @@ async function userProfileget(req, res) {
 };
 
 async function userProfilepost(req, res) {
-    var token = req.body.token;
-    console.log(token, "token");
+    var token = req.headers.token;
+    console.log(token, "token post.....");
     var decoded = jwt.verify(token, 'key');
     var user = await UserModel.findOne({ _id: decoded._id });
     console.log(user, "userprofile===================");
