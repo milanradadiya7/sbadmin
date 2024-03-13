@@ -17,47 +17,13 @@ async function userRegister(req, res) {
     });
 };
 
-async function userProfileget(req, res) {
-    var user = await UserModel.findOne({});
-    res.json({
-        status: true,
-        message: "Profile Find",
-        data: user
-    });
-}
-
-async function userProfilepost(req, res) {
-    var user = await UserModel.findOne({});
-    console.log(user, "userprofile===================");
-    var token = req.body.token;
-    console.log(token, "token");
-    var decoded = jwt.verify(token, 'key');
-    res.json({
-        token: token,
-        status: true,
-        message: "Profile Created",
-        Data: decoded,
-        data: user
-    })
-};
-
-async function userTable(req, res) {
-    var usertable = await UserModel.find({});
-    console.log(usertable);
-    res.json({
-        status: true,
-        message: "Usertable Created",
-        data: usertable
-    });
-};
-
 async function userlogin(req, res) {
     var data = req.body
     console.log(data.email);
     console.log(data.password);
     var loginUser = await UserModel.findOne({
-        email: req.body.email,
-        password: req.body.password
+        email: data.email,
+        password: data.password
     });
     const loginuser = {
         firstName: data.firstname,
@@ -66,8 +32,7 @@ async function userlogin(req, res) {
         password: data.password
     }
     console.log(loginUser, "userlist....................");
-    req.session.user = loginUser;
-    console.log(req.session.user, "user session ..........................");
+
     if (loginUser == null) {
         res.json({
             status: false,
@@ -86,9 +51,45 @@ async function userlogin(req, res) {
 
 };
 
+async function userProfileget(req, res) {
+    var user = await UserModel.findOne({ _id: req.body.id });
+    console.log(user, "userprofileget..........");
+    var token = req.body.token;
+    console.log(token, "token............");
+    res.json({
+        status: true,
+        message: "Profile Find",
+        data: user
+    });
+}
+
+async function userProfilepost(req, res) {
+    var user = await UserModel.findOne({ _id: req.body.id });
+    console.log(user, "userprofile===================");
+    var token = req.body.token;
+    console.log(token, "token");
+    var decoded = jwt.verify(token, 'key');
+    res.json({
+        status: true,
+        message: "Profile Created",
+        Data: decoded,
+        data: user
+    })
+};
+
+async function userTable(req, res) {
+    var usertable = await UserModel.find({});
+    console.log(usertable);
+    res.json({
+        status: true,
+        message: "Usertable Created",
+        data: usertable
+    });
+};
+
 async function userProfileUpdate(req, res) {
-    var data = req.body;
-    var updateUser = await UserModel.updateOne({}, {
+    var data = req.header;
+    var updateUser = await UserModel.updateOne({ _id: data.id }, {
         firstName: data.firstname,
         lastName: data.lastname,
         email: data.email,

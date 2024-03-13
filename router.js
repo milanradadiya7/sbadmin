@@ -38,15 +38,15 @@ route.get("/logout", logOut);
 
 
 route.post("/api/user-register", userRegister);
-route.get("/api/user-profile-get", userProfileget);
+route.post("/api/user-login", userlogin);
+route.get("/api/user-profile", userProfileget);
 route.post("/api/user-profile", userProfilepost);
+route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-table", userTable);
 route.get("/api/user-product", userProduct);
 route.post("/api/user-productcreate", userProductCreate);
-route.post("/api/user-login", userlogin);
 route.get("/api/user-product-update", getproductUpdate);
 route.post("/api/user-product-update", postproductUpdate);
-route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-remove", userRemove);
 
 
