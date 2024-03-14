@@ -26,7 +26,7 @@ async function userlogin(req, res) {
         password: data.password
     });
     const loginuser = {
-        _id: loginUser._id,
+        _id: loginUser.id,
         firstName: loginUser.firstname,
         lastName: loginUser.lastname,
         email: loginUser.email,
@@ -80,7 +80,7 @@ async function userProfileget(req, res) {
 
 async function userTable(req, res) {
     var usertable = await UserModel.find({});
-    console.log(usertable);
+    console.log(usertable, "usertable.....");
     res.json({
         status: true,
         message: "Usertable Created",
@@ -89,8 +89,7 @@ async function userTable(req, res) {
 };
 
 async function userProfileUpdate(req, res) {
-    var token = res.headers.authorization;
-    console.log(token);
+    var token = req.headers.authorization;
     var data = req.body;
     var decoded = jwt.verify(token, 'key');
     var updateUser = await UserModel.updateOne({ _id: decoded._id }, {
@@ -98,7 +97,8 @@ async function userProfileUpdate(req, res) {
         lastName: data.lastname,
         email: data.email,
         password: data.password
-    });
+    }, { upsert: true });
+    console.log(updateUser, "profile update............................");
     res.json({
         status: true,
         message: "User Updated",
@@ -114,7 +114,7 @@ async function userRemove(req, res) {
     res.json({
         status: true,
         message: "User Removed",
-        data: removeUser
+        data: removeUser,
     });
 }
 
