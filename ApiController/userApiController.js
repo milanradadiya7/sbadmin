@@ -53,7 +53,7 @@ async function userlogin(req, res) {
 };
 
 async function userProfileget(req, res) {
-    var token = req.headers.token;
+    var token = req.headers.authorization;
     console.log(token, "token get.....");
     var decoded = jwt.verify(token, 'key');
     var user = await UserModel.findOne({ _id: decoded._id });
@@ -65,18 +65,18 @@ async function userProfileget(req, res) {
     });
 };
 
-async function userProfilepost(req, res) {
-    var token = req.headers.token;
-    console.log(token, "token post.....");
-    var decoded = jwt.verify(token, 'key');
-    var user = await UserModel.findOne({ _id: decoded._id });
-    console.log(user, "userprofile===================");
-    res.json({
-        status: true,
-        message: "Profile Created",
-        data: user
-    })
-};
+// async function userProfilepost(req, res) {
+//     var token = req.headers.token;
+//     console.log(token, "token post.....");
+//     var decoded = jwt.verify(token, 'key');
+//     var user = await UserModel.findOne({ _id: decoded._id });
+//     console.log(user, "userprofile===================");
+//     res.json({
+//         status: true,
+//         message: "Profile Created",
+//         data: user
+//     })
+// };
 
 async function userTable(req, res) {
     var usertable = await UserModel.find({});
@@ -89,8 +89,11 @@ async function userTable(req, res) {
 };
 
 async function userProfileUpdate(req, res) {
-    var data = req.header;
-    var updateUser = await UserModel.updateOne({ _id: data.id }, {
+    var token = res.headers.authorization;
+    console.log(token);
+    var data = req.body;
+    var decoded = jwt.verify(token, 'key');
+    var updateUser = await UserModel.updateOne({ _id: decoded._id }, {
         firstName: data.firstname,
         lastName: data.lastname,
         email: data.email,
@@ -119,7 +122,7 @@ async function userRemove(req, res) {
 module.exports = {
     userRegister,
     userProfileget,
-    userProfilepost,
+    // userProfilepost,
     userTable,
     userlogin,
     userProfileUpdate,

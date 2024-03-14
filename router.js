@@ -2,7 +2,7 @@ const express = require('express');
 const { dashboard, button, card, color, border, animation, other, forgotPassword, error, product, productCreateget, productCreatepost, chart,
     table, remove, updateProfile, profile, sendMail, resetPasswordget, resetPasswordpost, removeData, productUpdateget, productUpdatepost } = require('./controller/homeController');
 const { loginget, loginpost, registerget, registerpost, logOut } = require('./controller/userController');
-const { userTable, userRegister, userlogin, userProfileUpdate, userRemove, userProfilepost, userProfileget } = require('./ApiController/userApiController');
+const { userTable, userRegister, userlogin, userProfileUpdate, userRemove, userProfileget } = require('./ApiController/userApiController');
 const { userProduct, userProductCreate, getproductUpdate, postproductUpdate } = require('./ApiController/productApiController');
 const route = express.Router();
 
@@ -40,7 +40,7 @@ route.get("/logout", logOut);
 route.post("/api/user-register", userRegister);
 route.post("/api/user-login", userlogin);
 route.get("/api/user-profile", userProfileget);
-route.post("/api/user-profile", userProfilepost);
+// route.post("/api/user-profile", userProfilepost);
 route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-table", userTable);
 route.get("/api/user-product", userProduct);
