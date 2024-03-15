@@ -187,6 +187,13 @@ async function table(req, res) {
 };
 // user table show kare end ...................................................
 
+async function adProfile(req, res) {
+    var adminprofile = await UserModel.findOne({});
+    console.log(adminprofile, "adminprofile...........");
+    res.render("adminProfile", { adminprofile, layout: "layout/authLayout/authLayer" })
+}
+
+
 // profile page show kare start ...............................................
 async function profile(req, res) {
     var user = await UserModel.findOne({ _id: req.query.id });
@@ -241,5 +248,6 @@ module.exports = {
     remove,
     updateProfile,
     profile,
+    adProfile,
     sendMail
 }

@@ -2,47 +2,40 @@
 <link rel="stylesheet" href="css/index.css">
 
 <body>
-    <div class="profile-image">
-        <div class="profile-page">
-            <h1 class="text-white">Update Page</h1>
-            <form action="/update" method="post">
-                <input type="hidden" value="<%= user._id %>" name="id" id="">
-                <div class="form-floating mb-3 w-50">
-                    <input type="text" class="form-control" value="<%= user.firstName %>" name="firstname"
-                        id="floatingInput" placeholder="First Name">
-                    <label for="floatingInput">First Name</label>
-                </div>
+  <div class="profile-image">
+    <div class="profile-page">
+      <h1 class="text-white">Update Page</h1>
+      <form action="/update" method="post">
+        <input type="hidden" value="<%= user._id %>" name="id" id="">
+        <div class="form-floating mb-3 w-50">
+          <input type="text" class="form-control" value="<%= user.firstName %>" name="firstname" id="floatingInput"
+            placeholder="First Name">
+          <label for="floatingInput">First Name</label>
+        </div>
 
-                <div class="form-floating mb-3 w-50">
-                    <input type="text" class="form-control" value="<%= user.lastName %>" name="lastname"
-                        id="floatingPassword" placeholder="Last Name">
-                    <label for="floatingInput">Last Name</label>
-                </div>
+        <div class="form-floating mb-3 w-50">
+          <input type="text" class="form-control" value="<%= user.lastName %>" name="lastname" id="floatingPassword"
+            placeholder="Last Name">
+          <label for="floatingInput">Last Name</label>
+        </div>
 
-                <div class="form-floating mb-3 w-50">
-                    <input type="email" class="form-control" value="<%= user.email %>" name="email" id="floatingInput"
-                        placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
-                </div>
+        <div class="form-floating mb-3 w-50">
+          <input type="email" class="form-control" value="<%= user.email %>" name="email" id="floatingInput"
+            placeholder="name@example.com">
+          <label for="floatingInput">Email address</label>
+        </div>
 
-                <div class="form-floating mb-3 w-50">
-                    <input type="password" class="form-control" value="<%= user.password %>" name="password"
-                        id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                </div>
+        <div class="form-floating mb-3 w-50">
+          <input type="password" class="form-control" value="<%= user.password %>" name="password" id="floatingPassword"
+            placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
 
-                <div class="form-floating mb-3 w-50">
-                    <input type="password" class="form-control" value="<%= user.repeatPassword %>" name="repeatPassword"
-                        id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                </div>
-
-
-                <div class="login-btn">
-                    <button type="submit" class="btn btn-primary text-white mt-3">Update</button>
-                </div>
+        <div class="login-btn">
+          <button type="submit" class="btn btn-primary text-white mt-3">Update</button>
         </div>
     </div>
-    </form>
+  </div>
+  </form>
 
 </body>

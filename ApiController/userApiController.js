@@ -52,8 +52,6 @@ async function userlogin(req, res) {
 
 };
 
-
-
 async function userProfileget(req, res) {
     var user = await UserModel.findOne({ _id: req.payload._id });
     console.log(user, "userprofileget..........");
