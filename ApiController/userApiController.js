@@ -52,11 +52,10 @@ async function userlogin(req, res) {
 
 };
 
+
+
 async function userProfileget(req, res) {
-    var token = req.headers.authorization;
-    console.log(token, "token get.....");
-    var decoded = jwt.verify(token, 'key');
-    var user = await UserModel.findOne({ _id: decoded._id });
+    var user = await UserModel.findOne({ _id: req.payload._id });
     console.log(user, "userprofileget..........");
     res.json({
         status: true,
@@ -107,10 +106,10 @@ async function userProfileUpdate(req, res) {
 };
 
 async function userRemove(req, res) {
-    var id = req.query.id;
     var removeUser = await UserModel.deleteOne({
-        _id: id
+        _id: req.query.id
     });
+    console.log(req.query.id, "user remove id............");
     res.json({
         status: true,
         message: "User Removed",

@@ -6,6 +6,28 @@ const { userTable, userRegister, userlogin, userProfileUpdate, userRemove, userP
 const { userProduct, userProductCreate, getproductUpdate, postproductUpdate } = require('./ApiController/productApiController');
 const route = express.Router();
 
+// token verify in user 0
+function verify(req, res, next) {
+    var token = req.headers.authorization;
+    console.log(token, "token get.....");
+    if (!token) {
+        res.json({
+            status: false,
+            message: "provide token"
+        });
+    }
+
+    try {
+        req.payload = jwt.verify(token, 'key');
+        next()
+    } catch (error) {
+        res.json({
+            status: false,
+            message: error
+        });
+    };
+};
+
 
 route.get("/dashboard", dashboard);
 route.get("/button", button);
@@ -39,7 +61,7 @@ route.get("/logout", logOut);
 
 route.post("/api/user-register", userRegister);
 route.post("/api/user-login", userlogin);
-route.get("/api/user-profile", userProfileget);
+route.get("/api/user-profile", verify, userProfileget);
 // route.post("/api/user-profile", userProfilepost);
 route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-table", userTable);

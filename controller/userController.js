@@ -28,7 +28,6 @@ async function loginpost(req, res) {
         res.redirect("/login");
     } else {
         res.redirect("/dashboard");
-        
     }
 };
 // login post end....................
