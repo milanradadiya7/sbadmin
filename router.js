@@ -2,8 +2,9 @@ const express = require('express');
 const { dashboard, button, card, color, border, animation, other, forgotPassword, error, product, productCreateget, productCreatepost, chart,
     table, remove, updateProfile, profile, sendMail, resetPasswordget, resetPasswordpost, removeData, productUpdateget, productUpdatepost, adProfile } = require('./controller/homeController');
 const { loginget, loginpost, registerget, registerpost, logOut } = require('./controller/userController');
-const { userTable, userRegister, userlogin, userProfileUpdate, userRemove, userProfileget } = require('./ApiController/userApiController');
+const { userTable, userRegister, userlogin, userProfileUpdate, userRemove, userProfileget, userProfile } = require('./ApiController/userApiController');
 const { userProduct, userProductCreate, getproductUpdate, postproductUpdate } = require('./ApiController/productApiController');
+const jwt = require('jsonwebtoken');
 const route = express.Router();
 
 // token verify in user 0
@@ -21,6 +22,7 @@ function verify(req, res, next) {
         req.payload = jwt.verify(token, 'key');
         next()
     } catch (error) {
+        console.log(error, 'error in md');
         res.json({
             status: false,
             message: error
@@ -63,7 +65,7 @@ route.get("/logout", logOut);
 route.post("/api/user-register", userRegister);
 route.post("/api/user-login", userlogin);
 route.get("/api/user-profile", verify, userProfileget);
-// route.post("/api/user-profile", userProfilepost);
+route.get("/api/profile-user", userProfile);
 route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-table", userTable);
 route.get("/api/user-product", userProduct);

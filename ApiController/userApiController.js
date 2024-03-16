@@ -54,6 +54,7 @@ async function userlogin(req, res) {
 
 async function userProfileget(req, res) {
     var user = await UserModel.findOne({ _id: req.payload._id });
+    console.log(req.payload_id, "payload token............");
     console.log(user, "userprofileget..........");
     res.json({
         status: true,
@@ -62,18 +63,16 @@ async function userProfileget(req, res) {
     });
 };
 
-// async function userProfilepost(req, res) {
-//     var token = req.headers.token;
-//     console.log(token, "token post.....");
-//     var decoded = jwt.verify(token, 'key');
-//     var user = await UserModel.findOne({ _id: decoded._id });
-//     console.log(user, "userprofile===================");
-//     res.json({
-//         status: true,
-//         message: "Profile Created",
-//         data: user
-//     })
-// };
+
+async function userProfile(req, res) {
+    var uProfile = await UserModel.findOne({ _id: req.body.id });
+    console.log(uProfile,"user.....profile...");
+    res.json({
+        status: true,
+        message: "user get",
+        data: uProfile
+    })
+}
 
 async function userTable(req, res) {
     var usertable = await UserModel.find({});
@@ -119,7 +118,7 @@ async function userRemove(req, res) {
 module.exports = {
     userRegister,
     userProfileget,
-    // userProfilepost,
+    userProfile,
     userTable,
     userlogin,
     userProfileUpdate,

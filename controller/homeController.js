@@ -191,8 +191,7 @@ async function adProfile(req, res) {
     var adminprofile = await UserModel.findOne({});
     console.log(adminprofile, "adminprofile...........");
     res.render("adminProfile", { adminprofile, layout: "layout/authLayout/authLayer" })
-}
-
+};
 
 // profile page show kare start ...............................................
 async function profile(req, res) {
