@@ -65,7 +65,7 @@ route.get("/logout", logOut);
 route.post("/api/user-register", userRegister);
 route.post("/api/user-login", userlogin);
 route.get("/api/user-profile", verify, userProfileget);
-route.get("/api/profile-user", userProfile);
+route.get("/api/profile-user/:userId", userProfile);
 route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-table", userTable);
 route.get("/api/user-product", userProduct);
