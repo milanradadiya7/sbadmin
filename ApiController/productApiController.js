@@ -37,7 +37,7 @@ async function getproductUpdate(req, res) {
         message: "Product Updated",
         data: getProductUpdate
     });
-}
+};
 
 async function postproductUpdate(req, res) {
     var data = req.body;

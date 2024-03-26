@@ -48,8 +48,7 @@ async function userlogin(req, res) {
             message: "Login Success",
             data: loginUser
         });
-    }
-
+    };
 };
 
 async function userProfileget(req, res) {
@@ -65,14 +64,14 @@ async function userProfileget(req, res) {
 
 
 async function userProfile(req, res) {
-    var uProfile = await UserModel.findOne({ _id: req.params.userId});
+    var uProfile = await UserModel.findOne({ _id: req.params.userId });
     console.log(uProfile, "user.....profile...");
     res.json({
         status: true,
         message: "user get",
         data: uProfile
-    })
-}
+    });
+};
 
 async function userTable(req, res) {
     var usertable = await UserModel.find({});

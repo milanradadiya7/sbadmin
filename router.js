@@ -7,7 +7,7 @@ const { userProduct, userProductCreate, getproductUpdate, postproductUpdate } = 
 const jwt = require('jsonwebtoken');
 const route = express.Router();
 
-// token verify in user 0
+// token verify in user
 function verify(req, res, next) {
     var token = req.headers.authorization;
     console.log(token, "token get.....");
@@ -16,7 +16,7 @@ function verify(req, res, next) {
             status: false,
             message: "provide token"
         });
-    }
+    };
 
     try {
         req.payload = jwt.verify(token, 'key');
