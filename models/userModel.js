@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 var mongoosePaginate = require('mongoose-paginate-v2');
 
 var schema = new mongoose.Schema({
+    role: {
+        type: String,
+        require: true
+    },
     firstName: {
         type: String,
         require: true

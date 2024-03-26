@@ -30,6 +30,19 @@ function verify(req, res, next) {
     };
 };
 
+// Admin condition 
+function Admin(req, res, next) {
+    var role = req.payload.role;
+    if (role == "Admin") {
+        next();
+    } else {
+        res.json({
+            status: false,
+            message: error
+        });
+    };
+};
+
 
 route.get("/dashboard", dashboard);
 route.get("/button", button);
@@ -64,7 +77,7 @@ route.get("/logout", logOut);
 
 route.post("/api/user-register", userRegister);
 route.post("/api/user-login", userlogin);
-route.get("/api/user-profile", verify, userProfileget);
+route.get("/api/user-profile", verify, Admin, userProfileget);
 route.get("/api/profile-user/:userId", userProfile);
 route.post("/api/user-profile-update", userProfileUpdate);
 route.get("/api/user-table", userTable);
